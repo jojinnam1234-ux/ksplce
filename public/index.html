@@ -1,0 +1,37 @@
+<h2>회원가입</h2>
+<input id="s_email">
+<input id="s_pw" type="password">
+<button onclick="signup()">가입</button>
+
+<h2>로그인</h2>
+<input id="l_email">
+<input id="l_pw" type="password">
+<button onclick="login()">로그인</button>
+
+<p id="msg"></p>
+
+<script>
+    async function signup() {
+        const r = await fetch("/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: s_email.value,
+                password: s_pw.value
+            })
+        })
+        msg.innerText = await r.text()
+    }
+
+    async function login() {
+        const r = await fetch("/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: l_email.value,
+                password: l_pw.value
+            })
+        })
+        msg.innerText = await r.text()
+    }
+</script>

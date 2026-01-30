@@ -1,0 +1,22 @@
+<h2>관리자 페이지</h2>
+<button onclick="load()">회원 불러오기</button>
+<div id="list"></div>
+
+<script>
+    async function load() {
+        const res = await fetch("/admin/users")
+        const users = await res.json()
+
+        list.innerHTML = users.map(u =>
+            `<p>
+      ${u.email} (${u.role})
+      <button onclick="del(${u.id})">삭제</button>
+    </p>`
+        ).join("")
+    }
+
+    async function del(id) {
+        await fetch("/admin/users/" + id, { method: "DELETE" })
+        load()
+    }
+</script>
