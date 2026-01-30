@@ -1,8 +1,20 @@
-const express = require("express")
+const express = require("express");
 const bcrypt = require("bcrypt")
 const { Pool } = require("pg")
 
-const app = express()
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+    res.send("hello world");
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
+
 app.use(express.json())
 app.use(express.static("public"))
 
